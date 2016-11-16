@@ -1,0 +1,108 @@
+{
+  "records": [
+    {
+      "record_id": {
+        "type": "RECORD_NUMBER",
+        "value": "1"
+      },
+      "subtable": {
+        "type": "SUBTABLE",
+        "value": [
+          {
+            "id": "1",
+            "value": {
+              "subfield1": {
+                "type": "SINGLE_LINE_TEXT",
+                "value": ""
+              },
+              "subfield2": {
+                "type": "FILE",
+                "value": [
+                  {
+                    "contentType": "text/plain",
+                    "fileKey":"20150417022053715283FF97DC413CBC4B7A41C",
+                    "name": "kintoneUpdates.txt",
+                    "size": "25302"
+                  },
+                  {
+                    "contentType": "text/plain",
+                    "fileKey": "20150417022159ECFC1223C4B34C939E1B9BD25",
+                    "name": "APIUpdatestxt",
+                    "size": "20311"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "id": "2",
+            "value": {
+              "subfield1": {
+                "type": "SINGLE_LINE_TEXT",
+                "value": "a"
+              },
+              "subfield2": {
+                "type": "FILE",
+                "value": [
+                  {
+                    "contentType": "text/plain",
+                    "fileKey":"20150417022053715agaerg134r2j939i904i3kj",
+                    "name": "kintoneUpdates2.txt",
+                    "size": "25400"
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      },
+      "$revision": {
+        "type": "__REVISION__",
+        "value": "4"
+      }
+    },
+    {
+      "record_id": {
+        "type": "RECORD_NUMBER",
+        "value": "2"
+      },
+      "subtable": {
+        "type": "SUBTABLE",
+        "value": [
+          {
+            "id": "4",
+            "value": {
+              "subfield1": {
+                "type": "SINGLE_LINE_TEXT",
+                "value": "foo"
+              },
+              "subfield2": {
+                "type": "FILE",
+                "value": []
+              }
+            }
+          }
+        ]
+      },
+      "$revision": {
+        "type": "__REVISION__",
+        "value": "4"
+      }
+    },
+    {
+      "record_id": {
+        "type": "RECORD_NUMBER",
+        "value": "2"
+      },
+      "subtable": {
+        "type": "SUBTABLE",
+        "value": []
+      },
+      "$revision": {
+        "type": "__REVISION__",
+        "value": "4"
+      }
+    }
+  ],
+  "totalCount": null
+}

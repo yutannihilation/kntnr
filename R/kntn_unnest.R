@@ -12,17 +12,31 @@ kntn_unnest_records <- function(records) {
   nested_df_cols <- purrr::map_lgl(records, is_nested_df)
   nested_df_colnames <- names(nested_df_cols)[nested_df_cols]
 
+  try_unnest_recursively <- FALSE
+
+  if(length(nested_df_colnames) > 0) {
+    # SUBTABLE may contain nested fields
+    try_unnest_recursively <- TRUE
+
+    records <- fill_dummy_all(records, nested_df_colnames, "fill_dummy_df")
+  }
+
   # character
   nested_chr_cols <- purrr::map_lgl(records, is_nested_chr)
   nested_chr_colnames <- names(nested_chr_cols)[nested_chr_cols]
 
-  records <- fill_dummy_all(records, nested_chr_colnames, "fill_dummy_chr")
-  records <- fill_dummy_all(records, nested_df_colnames, "fill_dummy_df")
+  if(length(nested_chr_colnames) > 0) {
+    records <- fill_dummy_all(records, nested_chr_colnames, "fill_dummy_chr")
+  }
 
   # We have to unnest one by one, otherwise we will see the error:
   # "All nested columns must have the same number of elements."
   for (col in c(nested_df_colnames, nested_chr_colnames)) {
     records <- tidyr::unnest_(records, col, .drop = FALSE)
+  }
+
+  if(try_unnest_recursively) {
+    records <- kntn_unnest_records(records)
   }
 
   records
@@ -49,12 +63,18 @@ fill_dummy_df <- function(x, nm) {
   idx_nonempty <- !idx_empty
 
   if(any(idx_nonempty)) {
-    dummy_colnames <- colnames(x[idx_nonempty][[1]])
+    dummy_df_example <- x[idx_nonempty][[1]]
+    dummy_colnames <- colnames(dummy_df_example)
+    dummy <- purrr::map(dummy_df_example,
+                        purrr::when(.,
+                                    is_nested_chr(.) ~ list(character(0)),
+                                    is_nested_df(.) ~ list(dplyr::data_frame()),
+                                    ~ NA))
   } else {
     dummy_colnames <- nm
+    dummy <- purrr::rerun(length(dummy_colnames), NA)
   }
 
-  dummy <- purrr::rerun(length(dummy_colnames), NA)
   names(dummy) <- dummy_colnames
   dummy_df <- dplyr::as_data_frame(dummy)
 
