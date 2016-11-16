@@ -1,5 +1,8 @@
 kntnr
 =====
+[![Travis-CI Build Status](https://travis-ci.org/yutannihilation/kntnr.svg?branch=master)](https://travis-ci.org/yutannihilation/kntnr)
+
+[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/yutannihilation/kntnr?branch=master&svg=true)](https://ci.appveyor.com/project/yutannihilation/kntnr)
 
 Retrieve data from [kintone](https://www.kintone.com/) via its API. kintone is an enterprise application platform.
 
@@ -35,7 +38,7 @@ To set another information, run `kntn_set_auth()` with `overwrite = TRUE`.
 kntn_set_auth(overwrite = TRUE)
 ```
 
-Or, unset the envvars by `kntn_unset_auth()`
+Or, unset the envvars by `kntn_unset_auth()`.
 
 ```r
 kntn_unset_auth()
