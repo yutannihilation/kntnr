@@ -1,6 +1,6 @@
 #' Parse 'kintone' API Response
 #'
-#' Convert various kind of fields to the correspondent R classes.
+#' Convert various kinds of fields to the correspondent R classes.
 #'
 #' @name kntn_parse
 #'

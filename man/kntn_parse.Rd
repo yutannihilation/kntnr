@@ -21,7 +21,7 @@ kntn_parse_field(x)
 \item{records}{List objects converted from multiple kintone records.}
 }
 \description{
-Convert various kind of fields to the correspondent R classes.
+Convert various kinds of fields to the correspondent R classes.
 }
 \examples{
 library(jsonlite)

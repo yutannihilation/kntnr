@@ -8,6 +8,14 @@ Retrieve data from [kintone](https://www.kintone.com/) via its API. kintone is a
 
 ## Installation
 
+Stable CRAN version
+
+```r
+install.packages("kntnr")
+```
+
+Dev version
+
 ```r
 devtools::install_github("yutannihilation/kntnr")
 ```
@@ -22,7 +30,7 @@ To use kintone API, kntnr needs the following environmental variables.
 * `KNTN_AUTH_TYPE`: authentication type (password or token)
 * `KNTN_AUTH`: API token or BASE64 encoded login name and password
 
-`kntn_set_auth()` sets these envvars interactively.
+`kntn_set_auth()` sets these environmental variables interactively.
 
 ```r
 # password-based authentication
@@ -38,7 +46,7 @@ To set another information, run `kntn_set_auth()` with `overwrite = TRUE`.
 kntn_set_auth(overwrite = TRUE)
 ```
 
-Or, unset the envvars by `kntn_unset_auth()`.
+Or, unset the environmental variables by `kntn_unset_auth()`.
 
 ```r
 kntn_unset_auth()
@@ -56,7 +64,7 @@ KNTN_AUTH = 1234567890
 
 ### Record API
 
-`kntn_record()` gets a single record from specified kintone application. `kntn_records()` retrieves multiple records at once. If the number of records is more than records_per_request (the default is 100), `kntn_records()` automatically split the request.
+`kntn_record()` gets a single record from the specified kintone application. `kntn_records()` retrieves multiple records at once. If the number of records is more than records_per_request (the default is 100), `kntn_records()` automatically splits the request into smaller subrequests.
 
 ```r
 app <- 10
@@ -80,7 +88,7 @@ kntn_unnest(d)
 
 ### File API
 
-Get a file from kintone API and parse it with `httr::content()`. If you want to parse it by yourself, specify `as = "raw"` or `as = "text"`. 
+`kntn_file()` gets a file from kintone API and try to parse it with `httr::content()`. If you want to parse it by yourself, specify `as = "raw"` or `as = "text"`. 
 
 ```r
 d <- kntn_record(app, id = 1)

@@ -31,9 +31,10 @@ kntn_records(app, fields = NULL, query = "", max_records = 1000L,
 \item{records_per_request}{Number of records per request (max: 100).}
 }
 \description{
-\code{kntn_record()} gets a single record from specified kintone application. \code{kntn_records()} retrieves multiple records at once.
-If the number of records is more than \code{records_per_request} (the default is 100), \code{kntn_records()} automatically split the
-request.
+\code{kntn_record()} gets a single record from the specified kintone application.
+\code{kntn_records()} retrieves multiple records at once. If the number of records is more than
+\code{records_per_request} (the default is 100), \code{kntn_records()} automatically splits the
+request into smaller subrequests.
 }
 \details{
 A field will be converted to the correspondent object by the type:
