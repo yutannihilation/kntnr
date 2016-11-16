@@ -33,6 +33,8 @@ To use kintone API, kntnr needs the following environmental variables.
 `kntn_set_auth()` sets these environmental variables interactively.
 
 ```r
+library(kntnr)
+
 # password-based authentication
 kntn_set_auth()
 
@@ -54,7 +56,7 @@ kntn_unset_auth()
 
 #### For non-interactive use
 
-You can define envvars in `.Renviron` which will be loaded when R session starts up. For more information, see `?Startup`.
+You can define the environmental variables in `.Renviron`, which is loaded at the start of an R session. For more information, see `?Startup`.
 
 ```r
 KNTN_URL = https://example.kintone.com/
