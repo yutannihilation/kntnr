@@ -1,4 +1,4 @@
-#' Unnest 'kintone' records
+#' Unnest 'kintone' Records
 #'
 #' The data retrieved by \link{kntn_records} may contain nested data.frames.
 #' \code{kntn_unnest_records()} unnests them by using \link[tidyr]{unnest}.

@@ -2,7 +2,7 @@
 % Please edit documentation in R/kntn_unnest.R
 \name{kntn_unnest_records}
 \alias{kntn_unnest_records}
-\title{Unnest 'kintone' records}
+\title{Unnest 'kintone' Records}
 \usage{
 kntn_unnest_records(records)
 }
