@@ -44,7 +44,8 @@ kntn_parse_record <- function(record, as = c("data.frame", "list")) {
 #' @rdname kntn_parse
 #' @keywords internal
 kntn_parse_records <- function(records) {
-  purrr::map_df(records, kntn_parse_record)
+  purrr::map_df(records, kntn_parse_record) %>%
+    fill_dummy_df_all
 }
 
 #' @rdname kntn_parse
@@ -157,17 +158,19 @@ kntn_parse_field.SUBTABLE     <- function(x) {
   }
 }
 
-fill_na_tbl_df_all <- function(x) {
-  nested_cols <- purrr::map_lgl(x, is.list)
+is_nested_dataframe <- function(x) { is.list(x) && dplyr::is.tbl(x[[1]])}
+
+fill_dummy_df_all <- function(x) {
+  nested_cols <- purrr::map_lgl(x, is_nested_dataframe)
   nested_colnames <- names(nested_cols)[nested_cols]
 
   dots <- purrr::map(nested_colnames,
-                     ~lazyeval::interp(~fill_na_tbl_df(col), col = as.name(.)))
+                     ~lazyeval::interp(~fill_dummy_df(col), col = as.name(.)))
   names(dots) <- nested_colnames
   dplyr::mutate_(x, .dots = dots)
 }
 
-fill_na_tbl_df <- function(x, nm) {
+fill_dummy_df <- function(x, nm) {
   idx_empty <- purrr::map_int(x, nrow) == 0
   idx_nonempty <- !idx_empty
 
