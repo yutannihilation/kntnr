@@ -66,7 +66,7 @@ fill_dummy_df <- function(x, nm) {
     dummy_df_example <- x[idx_nonempty][[1]]
     dummy_colnames <- colnames(dummy_df_example)
     dummy <- purrr::map(dummy_df_example,
-                        purrr::when(.,
+                        ~ purrr::when(.,
                                     is_nested_chr(.) ~ list(character(0)),
                                     is_nested_df(.) ~ list(dplyr::data_frame()),
                                     ~ NA))

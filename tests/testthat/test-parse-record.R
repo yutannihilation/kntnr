@@ -43,14 +43,14 @@ test_that("unnesting terriblly-nested records works", {
     kntn_parse_records %>%
     kntn_unnest_records
 
-  expect_identical(dim(records_obj), c(6L, 7L))
+  expect_identical(dim(records_obj), c(5L, 7L))
   expect_equivalent(table(records_obj$record_id),
-                    as.table(purrr::set_names(c(3,1,2), 1:3)))
+                    as.table(purrr::set_names(c(3,2), 1:2)))
 
   na_count <- dplyr::group_by(records_obj, record_id) %>%
-    dplyr::summarize(na_count_checkbox = sum(is.na(checkbox)),
+    dplyr::summarize(na_count_fileKey = sum(is.na(fileKey)),
                      na_count_subfield1 = sum(is.na(subfield1)))
-  expect_identical(na_count$na_count_checkbox, c(3L, 0L, 0L))
-  expect_identical(na_count$na_count_subfield1, c(0L, 0L, 2L))
+  expect_identical(na_count$na_count_fileKey, c(0L, 2L))
+  expect_identical(na_count$na_count_subfield1, c(0L, 1L))
 
 })
