@@ -1,13 +1,13 @@
 #' Unnest 'kintone' Records
 #'
 #' The data retrieved by \link{kntn_records} may contain nested data.frames.
-#' \code{kntn_unnest_records()} unnests them by using \link[tidyr]{unnest}.
+#' \code{kntn_unnest()} unnests them by using \link[tidyr]{unnest}.
 #' Note that this function is very experimental and may not work well for all data.
 #'
 #' @param records Data.frame retrived by kntn_records()
 #'
 #' @export
-kntn_unnest_records <- function(records) {
+kntn_unnest <- function(records) {
   # data.frame
   nested_df_cols <- purrr::map_lgl(records, is_nested_df)
   nested_df_colnames <- names(nested_df_cols)[nested_df_cols]
@@ -36,7 +36,7 @@ kntn_unnest_records <- function(records) {
   }
 
   if(try_unnest_recursively) {
-    records <- kntn_unnest_records(records)
+    records <- kntn_unnest(records)
   }
 
   records

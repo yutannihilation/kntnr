@@ -22,7 +22,7 @@ test_that("unnesting records works", {
   records_file <- system.file("extdata/records.json", package = "kntnr")
   records_obj  <- jsonlite::fromJSON(records_file, simplifyVector = FALSE)$records %>%
     kntn_parse_records %>%
-    kntn_unnest_records
+    kntn_unnest
 
   expect_identical(dim(records_obj), c(6L, 7L))
   expect_equivalent(table(records_obj$record_id),
@@ -41,7 +41,7 @@ test_that("unnesting terriblly-nested records works", {
   records_file <- system.file("extdata/records_nested.json", package = "kntnr")
   records_obj  <- jsonlite::fromJSON(records_file, simplifyVector = FALSE)$records %>%
     kntn_parse_records %>%
-    kntn_unnest_records
+    kntn_unnest
 
   expect_identical(dim(records_obj), c(5L, 7L))
   expect_equivalent(table(records_obj$record_id),
