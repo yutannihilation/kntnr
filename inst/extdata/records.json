@@ -13,6 +13,50 @@
         "type": "DROP_DOWN",
         "value": null
       },
+      "subtable": {
+        "type": "SUBTABLE",
+        "value": [
+          {
+            "id": "1",
+            "value": {
+              "subfield1": {
+                "type": "SINGLE_LINE_TEXT",
+                "value": ""
+              },
+              "subfield2": {
+                "type": "NUMBER",
+                "value": "1000"
+              }
+            }
+          },
+          {
+            "id": "2",
+            "value": {
+              "subfield1": {
+                "type": "SINGLE_LINE_TEXT",
+                "value": "a"
+              },
+              "subfield2": {
+                "type": "NUMBER",
+                "value": "11"
+              }
+            }
+          },
+          {
+            "id": "3",
+            "value": {
+              "subfield1": {
+                "type": "SINGLE_LINE_TEXT",
+                "value": "b"
+              },
+              "subfield2": {
+                "type": "NUMBER",
+                "value": "22"
+              }
+            }
+          }
+        ]
+      },
       "$revision": {
         "type": "__REVISION__",
         "value": "4"
@@ -31,11 +75,51 @@
         "type": "DROP_DOWN",
         "value": null
       },
+      "subtable": {
+        "type": "SUBTABLE",
+        "value": [
+          {
+            "id": "4",
+            "value": {
+              "subfield1": {
+                "type": "SINGLE_LINE_TEXT",
+                "value": "foo"
+              },
+              "subfield2": {
+                "type": "NUMBER",
+                "value": "0"
+              }
+            }
+          }
+        ]
+      },
+      "$revision": {
+        "type": "__REVISION__",
+        "value": "4"
+      }
+    },
+    {
+      "record_id": {
+        "type": "RECORD_NUMBER",
+        "value": "3"
+      },
+      "created_time": {
+        "type": "CREATED_TIME",
+        "value": "2016-11-16T09:22:00Z"
+      },
+      "dropdown": {
+        "type": "DROP_DOWN",
+        "value": "choice 2"
+      },
+      "subtable": {
+        "type": "SUBTABLE",
+        "value": []
+      },
       "$revision": {
         "type": "__REVISION__",
         "value": "4"
       }
     }
-    ],
+  ],
   "totalCount": null
 }

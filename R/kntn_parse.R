@@ -156,3 +156,30 @@ kntn_parse_field.SUBTABLE     <- function(x) {
     list(kntn_parse_records(records))
   }
 }
+
+fill_na_tbl_df_all <- function(x) {
+  nested_cols <- purrr::map_lgl(x, is.list)
+  nested_colnames <- names(nested_cols)[nested_cols]
+
+  dots <- purrr::map(nested_colnames,
+                     ~lazyeval::interp(~fill_na_tbl_df(col), col = as.name(.)))
+  names(dots) <- nested_colnames
+  dplyr::mutate_(x, .dots = dots)
+}
+
+fill_na_tbl_df <- function(x, nm) {
+  idx_empty <- purrr::map_int(x, nrow) == 0
+  idx_nonempty <- !idx_empty
+
+  if(any(idx_nonempty)) {
+    dummy_colnames <- colnames(x[idx_nonempty][[1]])
+  } else {
+    dummy_colnames <- nm
+  }
+
+  dummy <- purrr::rerun(length(dummy_colnames), NA)
+  names(dummy) <- dummy_colnames
+  dummy_df <- dplyr::as_data_frame(dummy)
+
+  purrr::map_if(x, idx_empty, ~ dummy_df)
+}

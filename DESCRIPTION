@@ -12,6 +12,7 @@ Imports:
     dplyr,
     httr,
     jsonlite,
+    lazyeval,
     lubridate,
     methods,
     purrr (>= 0.2),
