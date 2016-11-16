@@ -1,0 +1,41 @@
+{
+  "records": [
+    {
+      "record_id": {
+        "type": "RECORD_NUMBER",
+        "value": "1"
+      },
+      "created_time": {
+        "type": "CREATED_TIME",
+        "value": "2012-02-03T08:50:00Z"
+      },
+      "dropdown": {
+        "type": "DROP_DOWN",
+        "value": null
+      },
+      "$revision": {
+        "type": "__REVISION__",
+        "value": "4"
+      }
+    },
+    {
+      "record_id": {
+        "type": "RECORD_NUMBER",
+        "value": "2"
+      },
+      "created_time": {
+        "type": "CREATED_TIME",
+        "value": "2012-02-03T09:22:00Z"
+      },
+      "dropdown": {
+        "type": "DROP_DOWN",
+        "value": null
+      },
+      "$revision": {
+        "type": "__REVISION__",
+        "value": "4"
+      }
+    }
+    ],
+  "totalCount": null
+}
