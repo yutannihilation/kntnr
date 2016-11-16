@@ -203,10 +203,10 @@ kntn_records <- function(app, fields = NULL, query = "",
     message(sprintf("Getting %d records from %d", limit, offset))
     result_tmp <- kntn_records_once(url = url, app = app, fields = fields,
                                      query = query, as = as, verbose = verbose)
-    # TODO: as="text"
-    if(!is.character(result_tmp) && NROW(result_tmp) == 0) break
-
     result[[i]] <- result_tmp
+
+    # TODO: as="text"
+    if(!is.character(result_tmp) && NROW(result_tmp) < limit) break
 
     Sys.sleep(interval_time)
   }
