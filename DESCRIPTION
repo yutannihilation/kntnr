@@ -1,7 +1,7 @@
 Package: kntnr
 Type: Package
 Title: R Client For 'kintone' API
-Version: 0.3.0
+Version: 0.3.0.9000
 Date: 2016-11-10
 Authors@R: person("Hiroaki", "Yutani", , "yutani.ini@gmail.com", c("aut", "cre"))
 Description: Retrieve data from kintone (<https://www.kintone.com/>) via its API.
