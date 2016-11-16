@@ -1,4 +1,4 @@
-context("kntn_parse")
+context("kntn_parse and kntn_unnest")
 
 library(dplyr, warn.conflicts = FALSE)
 
@@ -15,5 +15,13 @@ test_that("parsing multiple records works", {
   records_obj  <- jsonlite::fromJSON(records_file, simplifyVector = FALSE)$records %>%
     kntn_parse_records
 
-  expect_identical(dim(records_obj), c(2L, 4L))
+  expect_identical(dim(records_obj), c(3L, 5L))
+})
+
+test_that("unnesting records works", {
+  records_file <- system.file("extdata/records.json", package = "kntnr")
+  records_obj  <- jsonlite::fromJSON(records_file, simplifyVector = FALSE)$records %>%
+    kntn_parse_records
+
+
 })

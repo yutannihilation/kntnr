@@ -13,6 +13,10 @@
         "type": "DROP_DOWN",
         "value": null
       },
+      "checkbox": {
+        "type": "CHECK_BOX",
+        "value": []
+      },
       "subtable": {
         "type": "SUBTABLE",
         "value": [
@@ -75,6 +79,12 @@
         "type": "DROP_DOWN",
         "value": null
       },
+      "checkbox": {
+        "type": "CHECK_BOX",
+        "value": [
+          "choice 1"
+        ]
+      },
       "subtable": {
         "type": "SUBTABLE",
         "value": [
@@ -110,6 +120,13 @@
       "dropdown": {
         "type": "DROP_DOWN",
         "value": "choice 2"
+      },
+      "checkbox": {
+        "type": "CHECK_BOX",
+        "value": [
+          "choice 1",
+          "choice 2"
+        ]
       },
       "subtable": {
         "type": "SUBTABLE",

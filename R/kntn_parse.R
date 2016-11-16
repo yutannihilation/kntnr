@@ -44,8 +44,7 @@ kntn_parse_record <- function(record, as = c("data.frame", "list")) {
 #' @rdname kntn_parse
 #' @keywords internal
 kntn_parse_records <- function(records) {
-  purrr::map_df(records, kntn_parse_record) %>%
-    fill_dummy_df_all
+  purrr::map_df(records, kntn_parse_record)
 }
 
 #' @rdname kntn_parse
@@ -94,7 +93,7 @@ kntn_parse_field.TIME         <- as.character
 
 kntn_wrap_with_list <- function(x) {
   if(all(is.na(x))) {
-    NA_character_
+    list(character(0))
   } else {
     list(purrr::flatten_chr(x))
   }
@@ -121,7 +120,7 @@ kntn_parse_field.MODIFIER     <- kntn_parse_single_user
 
 kntn_parse_multi_user <- function(x) {
   if(all(is.na(x))) {
-    list(NA_character_)
+    list(character(0))
   } else {
     list(purrr::map_chr(x, "code"))
   }
@@ -156,33 +155,4 @@ kntn_parse_field.SUBTABLE     <- function(x) {
     records <- purrr::map(x, "value")
     list(kntn_parse_records(records))
   }
-}
-
-is_nested_dataframe <- function(x) { is.list(x) && dplyr::is.tbl(x[[1]])}
-
-fill_dummy_df_all <- function(x) {
-  nested_cols <- purrr::map_lgl(x, is_nested_dataframe)
-  nested_colnames <- names(nested_cols)[nested_cols]
-
-  dots <- purrr::map(nested_colnames,
-                     ~lazyeval::interp(~fill_dummy_df(col), col = as.name(.)))
-  names(dots) <- nested_colnames
-  dplyr::mutate_(x, .dots = dots)
-}
-
-fill_dummy_df <- function(x, nm) {
-  idx_empty <- purrr::map_int(x, nrow) == 0
-  idx_nonempty <- !idx_empty
-
-  if(any(idx_nonempty)) {
-    dummy_colnames <- colnames(x[idx_nonempty][[1]])
-  } else {
-    dummy_colnames <- nm
-  }
-
-  dummy <- purrr::rerun(length(dummy_colnames), NA)
-  names(dummy) <- dummy_colnames
-  dummy_df <- dplyr::as_data_frame(dummy)
-
-  purrr::map_if(x, idx_empty, ~ dummy_df)
 }

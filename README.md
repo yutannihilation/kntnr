@@ -72,10 +72,10 @@ d <- kntn_records(app, max_records = 5000, records_per_request = 500L)
 ```
 
 Some types like SUBTABLE are converted as nested data.frame.
-You can unnest them by using `tidyr::unnest()`.
+You can unnest them by using `kntn_unnest_records()`.
 
 ```r
-tidyr::unnest(d, subtable)
+kntn_unnest_records(d)
 ```
 
 ### File API

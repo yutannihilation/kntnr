@@ -50,7 +50,7 @@
 #' }
 #'
 #' Some types will be converted to nested objects. You can unnest these fields by
-#' \link[tidyr]{unnest}.
+#' \link{kntn_unnest_records}.
 #'
 #' @examples
 #' \dontrun{
@@ -76,8 +76,8 @@
 #'                   query = "updated_time > \"2016-10-03T09:00:00+0900\"")
 #'
 #' # Some types like SUBTABLE are converted as nested data.frame.
-#' # You can unnest them by using tidyr::unnest()
-#' tidyr::unnest(d, subtable)
+#' # You can unnest them by using kntn_unnest_records.
+#' kntn_unnest_records(d)
 #' }
 #'
 #' @seealso \url{https://developer.kintone.io/hc/en-us/articles/213149287/}
