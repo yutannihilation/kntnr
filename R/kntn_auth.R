@@ -1,4 +1,4 @@
-#' Authorization Header For 'kintone'
+#' Authorization Header for 'kintone'
 #'
 #' \code{kntn_get_authorization_header()} constructs a header for authorization using \link[httr]{add_headers}.
 #' \code{kntn_set_auth()} interactivery asks for the type of authentication and the credential and store

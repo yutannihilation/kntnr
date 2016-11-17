@@ -1,4 +1,4 @@
-#' R Client For 'kintone' API
+#' R Client for 'kintone' API
 #'
 #' Retrieve data from kintone.
 #'

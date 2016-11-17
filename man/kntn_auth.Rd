@@ -5,7 +5,7 @@
 \alias{kntn_get_authorization_header}
 \alias{kntn_set_auth}
 \alias{kntn_unset_auth}
-\title{Authorization Header For 'kintone'}
+\title{Authorization Header for 'kintone'}
 \usage{
 kntn_get_authorization_header()
 

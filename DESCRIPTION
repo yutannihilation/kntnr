@@ -1,6 +1,6 @@
 Package: kntnr
 Type: Package
-Title: R Client For 'kintone' API
+Title: R Client for 'kintone' API
 Version: 0.4.0
 Date: 2016-11-17
 Authors@R: person("Hiroaki", "Yutani", , "yutani.ini@gmail.com", c("aut", "cre"))
