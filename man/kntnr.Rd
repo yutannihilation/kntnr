@@ -4,8 +4,8 @@
 \name{kntnr}
 \alias{kntnr}
 \alias{kntnr-package}
-\title{R client for kintone API}
+\title{R Client For 'kintone' API}
 \description{
-Retrieve data from kintone via its API.
+Retrieve data from kintone.
 }
 

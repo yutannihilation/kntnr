@@ -1,6 +1,6 @@
-#' R client for kintone API
+#' R Client For 'kintone' API
 #'
-#' Retrieve data from kintone via its API.
+#' Retrieve data from kintone.
 #'
 #' @docType package
 #' @name kntnr
