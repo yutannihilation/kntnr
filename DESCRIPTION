@@ -4,8 +4,8 @@ Title: R Client For 'kintone' API
 Version: 0.4.0
 Date: 2016-11-17
 Authors@R: person("Hiroaki", "Yutani", , "yutani.ini@gmail.com", c("aut", "cre"))
-Description: Retrieve data from kintone (<https://www.kintone.com/>) via its API.
-    kintone is an enterprise application platform.
+Description: Retrieve data from 'kintone' (<https://www.kintone.com/>) via its API.
+    'kintone' is an enterprise application platform.
 License: MIT + file LICENSE
 Imports:
     base64enc,
