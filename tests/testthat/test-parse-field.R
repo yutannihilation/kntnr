@@ -3,8 +3,7 @@ context("parse")
 test_parse_field <- function(txt, expect) {
   j <- jsonlite::fromJSON(txt, simplifyVector = FALSE)
   test_that(sprintf("parsing %s works", j$type), {
-    x <- kntn_set_S3Class(j)
-    x <- kntn_parse_field(x)
+    x <- kntn_parse_field(j)
     if(is.function(expect)){
       expect_true(expect(x))
     } else {

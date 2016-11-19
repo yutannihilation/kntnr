@@ -11,7 +11,7 @@
       },
       "dropdown": {
         "type": "DROP_DOWN",
-        "value": null
+        "value": ""
       },
       "checkbox": {
         "type": "CHECK_BOX",
@@ -77,7 +77,7 @@
       },
       "dropdown": {
         "type": "DROP_DOWN",
-        "value": null
+        "value": "Choice 2"
       },
       "checkbox": {
         "type": "CHECK_BOX",

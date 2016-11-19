@@ -22,20 +22,10 @@
 #' @seealso \url{https://developer.kintone.io/hc/en-us/articles/212494818/}
 NULL
 
-kntn_set_S3Class <- function(x) {
-  if(is.null(x$value) || length(x$value) == 0) {
-    x$value <- NA
-  }
-
-  structure(x$value,
-            class = c(x$type, class(x$value)))
-}
-
 #' @rdname kntn_parse
 #' @keywords internal
 kntn_parse_record <- function(record, as = c("data.frame", "list")) {
   record <- record %>%
-    purrr::map(kntn_set_S3Class) %>%
     purrr::map(kntn_parse_field)
 
   if (match.arg(as) == "data.frame") dplyr::as_data_frame(record) else record
@@ -49,26 +39,33 @@ kntn_parse_records <- function(records) {
 
 #' @rdname kntn_parse
 #' @keywords internal
-kntn_parse_field <- function(x) UseMethod("kntn_parse_field")
-
-#' @export
-kntn_parse_field.default      <- function(x) as.character(x)
-
-#' @export
-kntn_parse_field.__ID__       <- function(x) as.integer(x)
-
-#' @export
-kntn_parse_field.__REVISION__ <- function(x) as.integer(x)
-
-#' @export
-kntn_parse_field.NUMBER       <- function(x) as.numeric(x)
+kntn_parse_field <- function(x) {
+  switch(x$type,
+         `__ID__`       = as.integer(x$value),
+         `__REVISION__` = as.integer(x$value),
+         NUMBER         = as.numeric(x$value),
+         DATE           = lubridate::ymd(x$value, quiet = TRUE),
+         DATETIME       = kntn_parse_datetime(x$value),
+         CREATED_TIME   = kntn_parse_datetime(x$value),
+         UPDATED_TIME   = kntn_parse_datetime(x$value),
+         TIME           = as.character(x$value), # TODO: R has no method to handle timestamp without date
+         CHECK_BOX      = kntn_wrap_with_list(x$value),
+         MULTI_SELECT   = kntn_wrap_with_list(x$value),
+         CATEGORY       = kntn_wrap_with_list(x$value),
+         CREATOR        = kntn_parse_single_user(x$value),
+         MODIFIER       = kntn_parse_single_user(x$value),
+         USER_SELECT    = kntn_parse_multi_user(x$value),
+         ORGANIZATION_SELECT = kntn_parse_multi_user(x$value),
+         GROUP_SELECT   = kntn_parse_multi_user(x$value),
+         STATUS_ASSIGNEE = kntn_parse_multi_user(x$value),
+         FILE           = kntn_parse_file(x$value),
+         SUBTABLE       = kntn_parse_subtable(x$value),
+         as.character(x$value))
+}
 
 # check is.na() to surpress warnings about conversion
 NA_Date <- as.Date(NA)
 NA_POSIXct <- as.POSIXct(NA)
-
-#' @export
-kntn_parse_field.DATE         <- function(x) lubridate::ymd(x, quiet = TRUE)
 
 kntn_parse_datetime <- function(x) {
   if(is.na(x)) {
@@ -78,19 +75,6 @@ kntn_parse_datetime <- function(x) {
   }
 }
 
-#' @export
-kntn_parse_field.DATETIME     <- kntn_parse_datetime
-
-#' @export
-kntn_parse_field.CREATED_TIME <- kntn_parse_datetime
-
-#' @export
-kntn_parse_field.UPDATED_TIME <- kntn_parse_datetime
-
-# TODO: R has no method to handle timestamp without date
-#' @export
-kntn_parse_field.TIME         <- as.character
-
 kntn_wrap_with_list <- function(x) {
   if(all(is.na(x))) {
     list(character(0))
@@ -99,24 +83,9 @@ kntn_wrap_with_list <- function(x) {
   }
 }
 
-# wrap with list in order for dplyr to include in tbl_df
-#' @export
-kntn_parse_field.CHECK_BOX    <- kntn_wrap_with_list
-
-#' @export
-kntn_parse_field.MULTI_SELECT <- kntn_wrap_with_list
-
-#' @export
-kntn_parse_field.CATEGORY     <- kntn_wrap_with_list
-
-
-kntn_parse_single_user <- function(x) x$code %||% NA_character_
-
-#' @export
-kntn_parse_field.CREATOR      <- kntn_parse_single_user
-
-#' @export
-kntn_parse_field.MODIFIER     <- kntn_parse_single_user
+kntn_parse_single_user <- function(x) {
+  x$code %||% NA_character_
+}
 
 kntn_parse_multi_user <- function(x) {
   if(all(is.na(x))) {
@@ -126,20 +95,7 @@ kntn_parse_multi_user <- function(x) {
   }
 }
 
-#' @export
-kntn_parse_field.USER_SELECT  <- kntn_parse_multi_user
-
-#' @export
-kntn_parse_field.ORGANIZATION_SELECT <- kntn_parse_multi_user
-
-#' @export
-kntn_parse_field.GROUP_SELECT <- kntn_parse_multi_user
-
-#' @export
-kntn_parse_field.STATUS_ASSIGNEE <- kntn_parse_multi_user
-
-#' @export
-kntn_parse_field.FILE         <- function(x) {
+kntn_parse_file         <- function(x) {
   if(all(is.na(x))) {
     list(dplyr::data_frame())
   } else {
@@ -147,8 +103,7 @@ kntn_parse_field.FILE         <- function(x) {
   }
 }
 
-#' @export
-kntn_parse_field.SUBTABLE     <- function(x) {
+kntn_parse_subtable     <- function(x) {
   if(all(is.na(x))) {
     list(dplyr::data_frame())
   } else {
