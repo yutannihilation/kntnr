@@ -2,23 +2,21 @@
 % Please edit documentation in R/kntn_parse.R
 \name{kntn_parse}
 \alias{kntn_parse}
-\alias{kntn_parse_field}
+\alias{kntn_parse_col}
 \alias{kntn_parse_record}
 \alias{kntn_parse_records}
 \title{Parse 'kintone' API Response}
 \usage{
-kntn_parse_record(record, as = c("data.frame", "list"))
-
 kntn_parse_records(records)
 
-kntn_parse_field(x)
+kntn_parse_record(record)
+
+kntn_parse_col(x)
 }
 \arguments{
-\item{record}{List object converted from a single kintone record.}
-
-\item{as}{Desired type of output: \code{data.frame} or \code{list}.}
-
 \item{records}{List objects converted from multiple kintone records.}
+
+\item{record}{List object converted from a single kintone record.}
 }
 \description{
 Convert various kinds of fields to the correspondent R classes.

@@ -24,7 +24,7 @@ test_that("unnesting records works", {
     kntn_parse_records %>%
     kntn_unnest
 
-  expect_identical(dim(records_obj), c(6L, 7L))
+  expect_identical(dim(records_obj), c(6L, 8L))
   expect_equivalent(table(records_obj$record_id),
                     as.table(purrr::set_names(c(3,1,2), 1:3)))
 
@@ -43,7 +43,7 @@ test_that("unnesting terriblly-nested records works", {
     kntn_parse_records %>%
     kntn_unnest
 
-  expect_identical(dim(records_obj), c(5L, 7L))
+  expect_identical(dim(records_obj), c(5L, 8L))
   expect_equivalent(table(records_obj$record_id),
                     as.table(purrr::set_names(c(3,2), 1:2)))
 
