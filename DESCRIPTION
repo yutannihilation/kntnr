@@ -1,12 +1,14 @@
 Package: kntnr
 Type: Package
 Title: R Client for 'kintone' API
-Version: 0.4.0
+Version: 0.4.0.9000
 Date: 2016-11-17
 Authors@R: person("Hiroaki", "Yutani", , "yutani.ini@gmail.com", c("aut", "cre"))
 Description: Retrieve data from 'kintone' (<https://www.kintone.com/>) via its API.
     'kintone' is an enterprise application platform.
 License: MIT + file LICENSE
+URL: https://github.com/yutannihilation/kntnr
+BugReports: https://github.com/yutannihilation/kntnr/issues
 Imports:
     base64enc,
     dplyr,
