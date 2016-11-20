@@ -77,9 +77,6 @@ kntn_parse_col <- function(x) {
 }
 
 kntn_parse_datetime <- function(x) {
-  # x_flat <- x %>%
-  #   purrr::map_if(is.null, "") %>%
-  #   purrr::flatten_chr()
   lubridate::parse_date_time2(x, "YmdHMS", exact = TRUE)
 }
 
