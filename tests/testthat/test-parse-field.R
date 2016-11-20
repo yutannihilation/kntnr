@@ -3,11 +3,11 @@ context("parse")
 test_parse_field <- function(txt, expect) {
   j <- jsonlite::fromJSON(txt, simplifyVector = FALSE)
   test_that(sprintf("parsing %s works", j$type), {
-    x <- kntn_parse_field(j)
+    x <- kntn_parse_records(list(list(test = j)))
     if(is.function(expect)){
-      expect_true(expect(x))
+      expect_true(expect(x$test))
     } else {
-      expect_identical(x, expect)
+      expect_identical(x$test, expect)
     }
   })
 }
@@ -49,10 +49,26 @@ test_parse_field(
 
 test_parse_field(
   '{
+  "type": "CREATOR",
+  "value": null
+  }',
+  NA_character_
+)
+
+test_parse_field(
+  '{
     "type": "CREATED_TIME",
     "value": "2015-01-22T15:07:00Z"
   }',
   as.POSIXct("2015-01-22 15:07:00", tz = "UTC")
+)
+
+test_parse_field(
+  '{
+  "type": "CREATED_TIME",
+  "value": null
+  }',
+  function(x) is.na(x) && lubridate::is.POSIXct(x)
 )
 
 test_parse_field(
@@ -127,6 +143,15 @@ test_parse_field(
 
 test_parse_field(
   '{
+  "type": "CHECK_BOX",
+  "value": [
+  ]
+  }',
+  list(character(0))
+)
+
+test_parse_field(
+  '{
     "type": "RADIO_BUTTON",
     "value": "Choice 3"
   }',
@@ -176,6 +201,14 @@ test_parse_field(
   }
 )
 
+test_parse_field(
+  '{
+  "type": "FILE",
+  "value": []
+  }',
+  list(dplyr::data_frame())
+)
+
 
 test_parse_field(
   '{
@@ -191,6 +224,14 @@ test_parse_field(
     "value": "2015-04-15"
   }',
   as.Date("2015-04-15")
+)
+
+test_parse_field(
+  '{
+  "type": "DATE",
+  "value": null
+  }',
+  function(x) is.na(x) && lubridate::is.Date(x)
 )
 
 test_parse_field(
@@ -227,6 +268,13 @@ test_parse_field(
   list(c("john-d", "jane-r"))
 )
 
+test_parse_field(
+  '{
+    "type": "USER_SELECT",
+    "value": []
+  }',
+  list(character(0))
+)
 
 test_parse_field(
   '{
@@ -351,3 +399,57 @@ test_parse_field(
       identical(colnames(x[[1]]), c("textfield_0", "numberfield_0", "checkboxfield_0"))
   }
 )
+
+test_parse_field(
+  '{
+    "type": "SUBTABLE",
+    "value": []
+  }',
+  list(dplyr::data_frame())
+)
+
+
+test_that('kntn_parse_subtable_one() works',
+          {
+            d <- kntn_parse_subtable_one(
+              jsonlite::fromJSON('[
+  {
+    "id": "48277",
+    "value": {
+      "textfield_0": {
+        "type": "SINGLE_LINE_TEXT",
+        "value": "Hello kintone 1"
+      },
+      "numberfield_0": {
+        "type": "NUMBER",
+        "value": "5"
+      },
+      "checkboxfield_0": {
+      "type": "CHECK_BOX",
+        "value": [
+          "Choice1"
+        ]
+      }
+    }
+  },
+  {
+    "id": "48278",
+    "value": {
+      "textfield_0": {
+        "type": "SINGLE_LINE_TEXT",
+        "value": "Hello kintone 2"
+      },
+      "numberfield_0": {
+        "type": "NUMBER",
+        "value": "7"
+      },
+      "checkboxfield_0": {
+        "type": "CHECK_BOX",
+        "value": [
+          "Choice2"
+        ]
+      }
+    }
+  }
+]', simplifyVector = FALSE))
+            expect_true(dplyr::is.tbl(d))})
