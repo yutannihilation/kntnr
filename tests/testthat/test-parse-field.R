@@ -396,7 +396,7 @@ test_parse_field(
   }',
   function(x) {
     is.list(x) && dplyr::is.tbl(x[[1]]) &&
-      identical(colnames(x[[1]]), c("id", "textfield_0", "numberfield_0", "checkboxfield_0"))
+      identical(colnames(x[[1]]), c("textfield_0", "numberfield_0", "checkboxfield_0"))
   }
 )
 

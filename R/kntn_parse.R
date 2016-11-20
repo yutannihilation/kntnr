@@ -105,7 +105,5 @@ kntn_parse_subtable_one <- function(x) {
   if(length(x) == 0) return(dplyr::data_frame())
 
   x_trans <- purrr::transpose(x)
-  ids <- list(id = purrr::flatten_chr(x_trans$id))
-  values <- kntn_parse_records(x_trans$value)
-  dplyr::bind_cols(ids, values)
+  kntn_parse_records(x_trans$value)
 }
