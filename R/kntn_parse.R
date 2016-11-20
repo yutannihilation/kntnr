@@ -48,6 +48,8 @@ kntn_parse_col <- function(x) {
 
   type <- unique(purrr::flatten_chr(x_transposed$type))
   if(! type %in% NESTED_TYPES) {
+    # NULL cannot be treated as character.
+    x_transposed$value <- purrr::map_if(x_transposed$value, is.null, ~ NA_character_)
     x_transposed$value <- purrr::flatten_chr(x_transposed$value)
   }
 

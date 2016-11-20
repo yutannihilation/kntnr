@@ -66,7 +66,7 @@ test_parse_field(
 test_parse_field(
   '{
   "type": "CREATED_TIME",
-  "value": ""
+  "value": null
   }',
   function(x) is.na(x) && lubridate::is.POSIXct(x)
 )
@@ -224,6 +224,14 @@ test_parse_field(
     "value": "2015-04-15"
   }',
   as.Date("2015-04-15")
+)
+
+test_parse_field(
+  '{
+  "type": "DATE",
+  "value": null
+  }',
+  function(x) is.na(x) && lubridate::is.Date(x)
 )
 
 test_parse_field(
