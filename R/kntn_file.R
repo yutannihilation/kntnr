@@ -7,7 +7,6 @@
 #'
 #' @seealso \url{https://developer.kintone.io/hc/en-us/articles/212494468/}
 #'
-#' @param app App ID.
 #' @param fileKey File key.
 #' @param verbose If \code{TRUE}, output logs verbosely.
 #' @param as \code{as} parameter passed to \link[httr]{content}.
@@ -22,13 +21,12 @@
 #' # get a single record with a file attachment field
 #' d <- kntn_record(app, id = 1)
 #'
-#' f <- kntn_file(app, fileKey = x$Attachment[[1]]$fileKey[1])
+#' f <- kntn_file(fileKey = x$Attachment[[1]]$fileKey[1])
 #' }
 #'
 #' @export
-kntn_file <- function(app, fileKey, verbose = FALSE, as = NULL, type = NULL, encoding = NULL) {
-  query_params <- list(`app` = app,
-                       `fileKey`  = fileKey)
+kntn_file <- function(fileKey, verbose = FALSE, as = NULL, type = NULL, encoding = NULL) {
+  query_params <- list(`fileKey`  = fileKey)
   if(!purrr::is_scalar_character(fileKey)) {
     stop("fileKey must be a character scalar.")
   }

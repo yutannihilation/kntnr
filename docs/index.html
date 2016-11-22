@@ -104,7 +104,7 @@ d &lt;-<span class="st"> </span><span class="kw"><a href="reference/kntn_record.
 <p><code><a href="reference/kntn_file.html">kntn_file()</a></code> gets a file from kintone API and try to parse it with <code>httr::content()</code>. If you want to parse it by yourself, specify <code>as = "raw"</code> or <code>as = "text"</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">d &lt;-<span class="st"> </span><span class="kw"><a href="reference/kntn_record.html">kntn_record</a></span>(app, <span class="dt">id =</span> <span class="dv">1</span>)
 
-f &lt;-<span class="st"> </span><span class="kw"><a href="reference/kntn_file.html">kntn_file</a></span>(app, <span class="dt">fileKey =</span> x$Attachment[[<span class="dv">1</span>]]$fileKey[<span class="dv">1</span>])</code></pre></div>
+f &lt;-<span class="st"> </span><span class="kw"><a href="reference/kntn_file.html">kntn_file</a></span>(<span class="dt">fileKey =</span> x$Attachment[[<span class="dv">1</span>]]$fileKey[<span class="dv">1</span>])</code></pre></div>
 </div>
 </div>
 </div>
