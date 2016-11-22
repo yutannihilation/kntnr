@@ -4,12 +4,10 @@
 \alias{kntn_file}
 \title{'kintone' File API}
 \usage{
-kntn_file(app, fileKey, verbose = FALSE, as = NULL, type = NULL,
+kntn_file(fileKey, verbose = FALSE, as = NULL, type = NULL,
   encoding = NULL)
 }
 \arguments{
-\item{app}{App ID.}
-
 \item{fileKey}{File key.}
 
 \item{verbose}{If \code{TRUE}, output logs verbosely.}
@@ -32,7 +30,7 @@ app <- 10
 # get a single record with a file attachment field
 d <- kntn_record(app, id = 1)
 
-f <- kntn_file(app, fileKey = x$Attachment[[1]]$fileKey[1])
+f <- kntn_file(fileKey = x$Attachment[[1]]$fileKey[1])
 }
 
 }

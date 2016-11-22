@@ -95,5 +95,5 @@ kntn_unnest(d)
 ```r
 d <- kntn_record(app, id = 1)
 
-f <- kntn_file(app, fileKey = x$Attachment[[1]]$fileKey[1])
+f <- kntn_file(fileKey = x$Attachment[[1]]$fileKey[1])
 ```
