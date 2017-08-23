@@ -1,4 +1,4 @@
-# kntnr 0.4.0.9000
+# kntnr 0.4.1
 
 ## Breaking changes
 
@@ -7,6 +7,7 @@
 ## Minor changes
 
 * Improve performance.
+* Fix compatibility problems with dplyr >0.7.
 
 # kntnr 0.4.0
 
