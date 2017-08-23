@@ -14,4 +14,3 @@ The data retrieved by \link{kntn_records} may contain nested data.frames.
 \code{kntn_unnest()} unnests them by using \link[tidyr]{unnest}.
 Note that this function is very experimental and may not work well for all data.
 }
-

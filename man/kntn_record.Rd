@@ -2,6 +2,7 @@
 % Please edit documentation in R/kntn_record.R
 \name{kntn_record}
 \alias{kntn_record}
+\alias{kntn_record}
 \alias{kntn_records}
 \title{'kintone' Record API}
 \usage{
@@ -104,4 +105,3 @@ kntn_unnest(d)
 \seealso{
 \url{https://developer.kintone.io/hc/en-us/articles/213149287/}
 }
-

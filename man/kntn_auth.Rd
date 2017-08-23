@@ -53,4 +53,3 @@ Sys.setenv("KNTN_AUTH_TYPE" = "token")
 \seealso{
 \url{https://developer.kintone.io/hc/en-us/articles/212495188/#userauthentication}
 }
-

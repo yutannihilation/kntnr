@@ -37,4 +37,3 @@ f <- kntn_file(fileKey = x$Attachment[[1]]$fileKey[1])
 \seealso{
 \url{https://developer.kintone.io/hc/en-us/articles/212494468/}
 }
-

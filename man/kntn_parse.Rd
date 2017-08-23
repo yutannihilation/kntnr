@@ -2,9 +2,9 @@
 % Please edit documentation in R/kntn_parse.R
 \name{kntn_parse}
 \alias{kntn_parse}
-\alias{kntn_parse_col}
-\alias{kntn_parse_record}
 \alias{kntn_parse_records}
+\alias{kntn_parse_record}
+\alias{kntn_parse_col}
 \title{Parse 'kintone' API Response}
 \usage{
 kntn_parse_records(records)
@@ -37,4 +37,3 @@ kntnr:::kntn_parse_records(rcds)
 \url{https://developer.kintone.io/hc/en-us/articles/212494818/}
 }
 \keyword{internal}
-

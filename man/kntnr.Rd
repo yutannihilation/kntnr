@@ -8,4 +8,3 @@
 \description{
 Retrieve data from kintone.
 }
-

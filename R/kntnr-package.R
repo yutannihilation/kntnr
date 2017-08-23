@@ -4,7 +4,6 @@
 #'
 #' @docType package
 #' @name kntnr
-#' @aliases kntnr-package
 #' @importFrom dplyr %>%
 #' @importFrom purrr %||%
 #' @import methods
