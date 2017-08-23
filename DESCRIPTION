@@ -1,8 +1,8 @@
 Package: kntnr
 Type: Package
 Title: R Client for 'kintone' API
-Version: 0.4.0.9000
-Date: 2016-11-17
+Version: 0.4.0.9001
+Date: 2017-08-23
 Authors@R: person("Hiroaki", "Yutani", , "yutani.ini@gmail.com", c("aut", "cre"))
 Description: Retrieve data from 'kintone' (<https://www.kintone.com/>) via its API.
     'kintone' is an enterprise application platform.
@@ -11,15 +11,16 @@ URL: https://github.com/yutannihilation/kntnr
 BugReports: https://github.com/yutannihilation/kntnr/issues
 Imports:
     base64enc,
-    dplyr,
+    dplyr (>= 0.7.0),
     httr,
     jsonlite,
     lazyeval,
     lubridate,
     methods,
-    purrr (>= 0.2),
+    purrr (>= 0.2.3),
     rstudioapi,
-    stringr
+    stringr,
+    tibble
 Suggests:
     testthat,
     tidyr
