@@ -4,7 +4,7 @@
 #' \code{kntn_unnest()} unnests them by using \link[tidyr]{unnest}.
 #' Note that this function is very experimental and may not work well for all data.
 #'
-#' @param records Data.frame retrived by kntn_records()
+#' @param records Data.frame retrieved by kntn_records()
 #'
 #' @export
 kntn_unnest <- function(records) {
