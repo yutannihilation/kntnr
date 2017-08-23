@@ -26,7 +26,7 @@ NULL
 kntn_parse_records <- function(records) {
   tibble::as_tibble(
     purrr::map(purrr::transpose(records),
-             kntn_parse_col)
+               kntn_parse_col)
   )
 }
 
