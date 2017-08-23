@@ -24,7 +24,7 @@ NULL
 #' @rdname kntn_parse
 #' @keywords internal
 kntn_parse_records <- function(records) {
-  dplyr::bind_cols(
+  tibble::as_tibble(
     purrr::map(purrr::transpose(records),
                kntn_parse_col)
   )
