@@ -4,3 +4,11 @@ language: R
 sudo: false
 cache: packages
 cran: https://cran.rstudio.com/
+
+matrix:
+  include:
+  - r: devel
+  - r: release
+  - r: release
+    name: tidyr-devel
+    before_script: Rscript -e "remotes::install_github('tidyverse/tidyr')"
