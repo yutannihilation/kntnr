@@ -37,7 +37,7 @@ kntn_unnest <- function(records) {
     if (packageVersion("tidyr") > "0.8.99") {
       records <- tidyr::unnest_legacy(records, !!rlang::sym(col), .drop = FALSE)
     } else {
-      records <- tidyr::unnest_(records, col, .drop = FALSE)
+      records <- tidyr::unnest(records, !!rlang::sym(col), .drop = FALSE)
     }
   }
 
