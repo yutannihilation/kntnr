@@ -1,3 +1,7 @@
+# kntnr 0.4.2
+
+* Fix compatibility problem with tidyr v1.0.0.
+
 # kntnr 0.4.1
 
 ## Breaking changes

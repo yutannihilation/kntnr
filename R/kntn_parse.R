@@ -102,7 +102,7 @@ kntn_parse_subtable <- function(x) {
 }
 
 kntn_parse_subtable_one <- function(x) {
-  if(length(x) == 0) return(dplyr::data_frame())
+  if(length(x) == 0) return(tibble::tibble())
 
   x_trans <- purrr::transpose(x)
   kntn_parse_records(x_trans$value)

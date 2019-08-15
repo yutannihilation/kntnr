@@ -38,5 +38,5 @@ calc_ranges <- function(first_offset = 0L,
     ranges$limits <- append(ranges$limits, fraction)
   }
 
-  dplyr::as_data_frame(ranges)
+  tibble::as_tibble(ranges)
 }

@@ -14,28 +14,34 @@ kntn_unnest <- function(records) {
 
   try_unnest_recursively <- FALSE
 
-  if(length(nested_df_colnames) > 0) {
+  if (length(nested_df_colnames) > 0) {
     # SUBTABLE may contain nested fields
     try_unnest_recursively <- TRUE
 
-    records <- fill_dummy_all(records, nested_df_colnames, "fill_dummy_df")
+    records <- dplyr::mutate_at(records, nested_df_colnames, fill_dummy_df)
   }
 
   # character
   nested_chr_cols <- purrr::map_lgl(records, is_nested_chr)
   nested_chr_colnames <- names(nested_chr_cols)[nested_chr_cols]
 
-  if(length(nested_chr_colnames) > 0) {
-    records <- fill_dummy_all(records, nested_chr_colnames, "fill_dummy_chr")
+  if (length(nested_chr_colnames) > 0) {
+    records <- dplyr::mutate_at(records, nested_chr_colnames, fill_dummy_chr)
   }
 
   # We have to unnest one by one, otherwise we will see the error:
   # "All nested columns must have the same number of elements."
   for (col in c(nested_df_colnames, nested_chr_colnames)) {
-    records <- tidyr::unnest_(records, col, .drop = FALSE)
+    # deal with the breaking change introduced in tidyr v1.0.0
+    # c.f. https://tidyr.tidyverse.org/dev/articles/in-packages.html
+    if (utils::packageVersion("tidyr") > "0.8.99") {
+      records <- tidyr::unnest_legacy(records, !!rlang::sym(col), .drop = FALSE)
+    } else {
+      records <- tidyr::unnest(records, !!rlang::sym(col), .drop = FALSE)
+    }
   }
 
-  if(try_unnest_recursively) {
+  if (try_unnest_recursively) {
     records <- kntn_unnest(records)
   }
 
@@ -45,14 +51,6 @@ kntn_unnest <- function(records) {
 
 is_nested_df <- function(x) { is.list(x) && dplyr::is.tbl(x[[1]])}
 is_nested_chr <- function(x) { is.list(x) && is.character(x[[1]])}
-
-fill_dummy_all <- function(x, cols, funcname) {
-  dots <- purrr::map(cols,
-                        ~lazyeval::interp(~func(col),
-                                          func = as.name(funcname), col = as.name(.)))
-  names(dots) <- cols
-  dplyr::mutate_(x, .dots = dots)
-}
 
 fill_dummy_chr <- function(x, nm) {
   purrr::map_if(x, ~ length(.) == 0, ~ NA_character_)
@@ -68,7 +66,7 @@ fill_dummy_df <- function(x, nm) {
     dummy <- purrr::map(dummy_df_example,
                         ~ purrr::when(.,
                                     is_nested_chr(.) ~ list(character(0)),
-                                    is_nested_df(.) ~ list(dplyr::data_frame()),
+                                    is_nested_df(.) ~ list(tibble::tibble()),
                                     ~ NA))
   } else {
     dummy_colnames <- nm
@@ -76,7 +74,7 @@ fill_dummy_df <- function(x, nm) {
   }
 
   names(dummy) <- dummy_colnames
-  dummy_df <- dplyr::as_data_frame(dummy)
+  dummy_df <- tibble::as_tibble(dummy)
 
   purrr::map_if(x, idx_empty, ~ dummy_df)
 }

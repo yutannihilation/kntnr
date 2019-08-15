@@ -206,7 +206,7 @@ test_parse_field(
   "type": "FILE",
   "value": []
   }',
-  list(dplyr::data_frame())
+  list(tibble::tibble())
 )
 
 
@@ -405,7 +405,7 @@ test_parse_field(
     "type": "SUBTABLE",
     "value": []
   }',
-  list(dplyr::data_frame())
+  list(tibble::tibble())
 )
 
 

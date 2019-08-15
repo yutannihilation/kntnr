@@ -2,15 +2,15 @@
 % Please edit documentation in R/kntn_record.R
 \name{kntn_record}
 \alias{kntn_record}
-\alias{kntn_record}
 \alias{kntn_records}
 \title{'kintone' Record API}
 \usage{
-kntn_record(app, id, as = c("data.frame", "list", "text"), verbose = FALSE)
+kntn_record(app, id, as = c("data.frame", "list", "text"),
+  verbose = FALSE)
 
 kntn_records(app, fields = NULL, query = "", max_records = 1000L,
-  offset = 0L, records_per_request = 100L, as = c("data.frame", "list",
-  "text"), verbose = FALSE)
+  offset = 0L, records_per_request = 100L, as = c("data.frame",
+  "list", "text"), verbose = FALSE)
 }
 \arguments{
 \item{app}{App ID.}
