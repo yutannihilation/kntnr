@@ -1,12 +1,11 @@
 ## Test environments
-* local Windows install, R 3.4.1
-* ubuntu 12.04 (on travis-ci), R 3.4.1
+* local Windows install, R 3.6.0
+* ubuntu 16.04 (on travis-ci), R 3.6.1
 * win-builder (devel and release)
 
 ## R CMD check results
 
 0 errors | 0 warnings | 1 note
 
-* This is mainly a maintenance release to fix compatibility issue with dplyr >0.7.
-* This release contains one breaking change on the function kntn_file(). But, this function is not widely used,
-  the impact is expected to be negligible.
+* This is just a maintenance release to fix compatibility issue with upcoming release of tidyr.
+* This release contains no breaking changes.
