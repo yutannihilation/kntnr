@@ -34,8 +34,8 @@ kntn_unnest <- function(records) {
   for (col in c(nested_df_colnames, nested_chr_colnames)) {
     # deal with the breaking change introduced in tidyr v1.0.0
     # c.f. https://tidyr.tidyverse.org/dev/articles/in-packages.html
-    if (packageVersion("tidyr") > "0.8.3") {
-      records <- tidyr::unnest(records, data = col)
+    if (packageVersion("tidyr") > "0.8.99") {
+      records <- tidyr::unnest_legacy(records, !!rlang::sym(col), .drop = FALSE)
     } else {
       records <- tidyr::unnest_(records, col, .drop = FALSE)
     }
