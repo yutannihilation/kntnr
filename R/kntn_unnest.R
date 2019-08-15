@@ -18,7 +18,7 @@ kntn_unnest <- function(records) {
     # SUBTABLE may contain nested fields
     try_unnest_recursively <- TRUE
 
-    records <- fill_dummy_all(records, nested_df_colnames, "fill_dummy_df")
+    records <- dplyr::mutate_at(records, nested_df_colnames, fill_dummy_df)
   }
 
   # character
@@ -26,13 +26,19 @@ kntn_unnest <- function(records) {
   nested_chr_colnames <- names(nested_chr_cols)[nested_chr_cols]
 
   if(length(nested_chr_colnames) > 0) {
-    records <- fill_dummy_all(records, nested_chr_colnames, "fill_dummy_chr")
+    records <- dplyr::mutate_at(records, nested_chr_colnames, fill_dummy_chr)
   }
 
   # We have to unnest one by one, otherwise we will see the error:
   # "All nested columns must have the same number of elements."
   for (col in c(nested_df_colnames, nested_chr_colnames)) {
-    records <- tidyr::unnest_(records, col, .drop = FALSE)
+    # deal with the breaking change introduced in tidyr v1.0.0
+    # c.f. https://tidyr.tidyverse.org/dev/articles/in-packages.html
+    if (packageVersion("tidyr") > "0.8.3") {
+      records <- tidyr::unnest(records, data = col)
+    } else {
+      records <- tidyr::unnest_(records, col, .drop = FALSE)
+    }
   }
 
   if(try_unnest_recursively) {
@@ -45,14 +51,6 @@ kntn_unnest <- function(records) {
 
 is_nested_df <- function(x) { is.list(x) && dplyr::is.tbl(x[[1]])}
 is_nested_chr <- function(x) { is.list(x) && is.character(x[[1]])}
-
-fill_dummy_all <- function(x, cols, funcname) {
-  dots <- purrr::map(cols,
-                        ~lazyeval::interp(~func(col),
-                                          func = as.name(funcname), col = as.name(.)))
-  names(dots) <- cols
-  dplyr::mutate_(x, .dots = dots)
-}
 
 fill_dummy_chr <- function(x, nm) {
   purrr::map_if(x, ~ length(.) == 0, ~ NA_character_)
