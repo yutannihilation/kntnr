@@ -66,7 +66,7 @@ fill_dummy_df <- function(x, nm) {
     dummy <- purrr::map(dummy_df_example,
                         ~ purrr::when(.,
                                     is_nested_chr(.) ~ list(character(0)),
-                                    is_nested_df(.) ~ list(dplyr::data_frame()),
+                                    is_nested_df(.) ~ list(tibble::tibble()),
                                     ~ NA))
   } else {
     dummy_colnames <- nm
@@ -74,7 +74,7 @@ fill_dummy_df <- function(x, nm) {
   }
 
   names(dummy) <- dummy_colnames
-  dummy_df <- dplyr::as_data_frame(dummy)
+  dummy_df <- tibble::as_tibble(dummy)
 
   purrr::map_if(x, idx_empty, ~ dummy_df)
 }
