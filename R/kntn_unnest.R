@@ -14,7 +14,7 @@ kntn_unnest <- function(records) {
 
   try_unnest_recursively <- FALSE
 
-  if(length(nested_df_colnames) > 0) {
+  if (length(nested_df_colnames) > 0) {
     # SUBTABLE may contain nested fields
     try_unnest_recursively <- TRUE
 
@@ -25,7 +25,7 @@ kntn_unnest <- function(records) {
   nested_chr_cols <- purrr::map_lgl(records, is_nested_chr)
   nested_chr_colnames <- names(nested_chr_cols)[nested_chr_cols]
 
-  if(length(nested_chr_colnames) > 0) {
+  if (length(nested_chr_colnames) > 0) {
     records <- dplyr::mutate_at(records, nested_chr_colnames, fill_dummy_chr)
   }
 
@@ -34,14 +34,14 @@ kntn_unnest <- function(records) {
   for (col in c(nested_df_colnames, nested_chr_colnames)) {
     # deal with the breaking change introduced in tidyr v1.0.0
     # c.f. https://tidyr.tidyverse.org/dev/articles/in-packages.html
-    if (packageVersion("tidyr") > "0.8.99") {
+    if (utils::packageVersion("tidyr") > "0.8.99") {
       records <- tidyr::unnest_legacy(records, !!rlang::sym(col), .drop = FALSE)
     } else {
       records <- tidyr::unnest(records, !!rlang::sym(col), .drop = FALSE)
     }
   }
 
-  if(try_unnest_recursively) {
+  if (try_unnest_recursively) {
     records <- kntn_unnest(records)
   }
 
