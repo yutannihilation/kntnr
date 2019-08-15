@@ -17,6 +17,7 @@ Imports:
     lubridate,
     methods,
     purrr (>= 0.2.3),
+    rlang,
     rstudioapi,
     stringr,
     tibble,
@@ -24,4 +25,4 @@ Imports:
 Suggests:
     testthat
 LazyData: TRUE
-RoxygenNote: 6.0.1.9000
+RoxygenNote: 6.1.1
