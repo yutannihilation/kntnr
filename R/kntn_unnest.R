@@ -31,14 +31,9 @@ kntn_unnest <- function(records) {
 
   # We have to unnest one by one, otherwise we will see the error:
   # "All nested columns must have the same number of elements."
+  unnest_legacy <- get_unnest_legacy()
   for (col in c(nested_df_colnames, nested_chr_colnames)) {
-    # deal with the breaking change introduced in tidyr v1.0.0
-    # c.f. https://tidyr.tidyverse.org/dev/articles/in-packages.html
-    if (utils::packageVersion("tidyr") > "0.8.99") {
-      records <- tidyr::unnest_legacy(records, !!rlang::sym(col), .drop = FALSE)
-    } else {
-      records <- tidyr::unnest(records, !!rlang::sym(col), .drop = FALSE)
-    }
+    records <- unnest_legacy(records, !!rlang::sym(col), .drop = FALSE)
   }
 
   if (try_unnest_recursively) {
@@ -46,6 +41,17 @@ kntn_unnest <- function(records) {
   }
 
   records
+}
+
+# deal with the breaking change introduced in tidyr v1.0.0
+# c.f. https://tidyr.tidyverse.org/dev/articles/in-packages.html
+get_unnest_legacy <- function() {
+  if (utils::packageVersion("tidyr") > "0.8.99") {
+    # Using tidyr::unnest_legacy directly will cause CRAN check NOTE
+    getFromNamespace("unnest_legacy", "tidyr")
+  } else {
+    tidyr::unnest
+  }
 }
 
 
