@@ -7,4 +7,4 @@ This is a maintenance release to fix compatibility issue with upcoming release o
 
 ## R CMD check results
 
-0 errors | 0 warnings | 1 note
+0 errors | 0 warnings | 0 note
