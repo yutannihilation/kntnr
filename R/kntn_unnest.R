@@ -48,7 +48,7 @@ kntn_unnest <- function(records) {
 get_unnest_legacy <- function() {
   if (utils::packageVersion("tidyr") > "0.8.99") {
     # Using tidyr::unnest_legacy directly will cause CRAN check NOTE
-    getFromNamespace("unnest_legacy", "tidyr")
+    utils::getFromNamespace("unnest_legacy", "tidyr")
   } else {
     tidyr::unnest
   }
