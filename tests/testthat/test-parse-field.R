@@ -7,7 +7,7 @@ test_parse_field <- function(txt, expect) {
     if(is.function(expect)){
       expect_true(expect(x$test))
     } else {
-      expect_identical(x$test, expect)
+      expect_equivalent(x$test, expect)
     }
   })
 }
