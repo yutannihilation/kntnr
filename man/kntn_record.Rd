@@ -5,12 +5,18 @@
 \alias{kntn_records}
 \title{'kintone' Record API}
 \usage{
-kntn_record(app, id, as = c("data.frame", "list", "text"),
-  verbose = FALSE)
+kntn_record(app, id, as = c("data.frame", "list", "text"), verbose = FALSE)
 
-kntn_records(app, fields = NULL, query = "", max_records = 1000L,
-  offset = 0L, records_per_request = 100L, as = c("data.frame",
-  "list", "text"), verbose = FALSE)
+kntn_records(
+  app,
+  fields = NULL,
+  query = "",
+  max_records = 1000L,
+  offset = 0L,
+  records_per_request = 100L,
+  as = c("data.frame", "list", "text"),
+  verbose = FALSE
+)
 }
 \arguments{
 \item{app}{App ID.}
@@ -94,7 +100,7 @@ d <- kntn_records(app, as = "list")
 # get records matched with the specified query and fields.
 # See https://developer.kintone.io/hc/en-us/articles/213149287/ for the query syntax
 d <- kntn_records(app, fields = c("timestamp", "value"),
-                  query = "updated_time > \\"2016-10-03T09:00:00+0900\\"")
+                  query = "updated_time > \"2016-10-03T09:00:00+0900\"")
 
 # Some types like SUBTABLE are converted as nested data.frame.
 # You can unnest them by using kntn_unnest.

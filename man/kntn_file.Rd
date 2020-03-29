@@ -4,8 +4,7 @@
 \alias{kntn_file}
 \title{'kintone' File API}
 \usage{
-kntn_file(fileKey, verbose = FALSE, as = NULL, type = NULL,
-  encoding = NULL)
+kntn_file(fileKey, verbose = FALSE, as = NULL, type = NULL, encoding = NULL)
 }
 \arguments{
 \item{fileKey}{File key.}

@@ -3,7 +3,6 @@
 \docType{package}
 \name{kntnr}
 \alias{kntnr}
-\alias{kntnr-package}
 \title{R Client for 'kintone' API}
 \description{
 Retrieve data from kintone.
