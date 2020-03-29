@@ -10,5 +10,5 @@ matrix:
   - r: devel
   - r: release
   - r: release
-    name: tidyr-devel
-    before_script: Rscript -e "remotes::install_github('tidyverse/tidyr')"
+    name: dplyr-devel
+    before_script: Rscript -e "remotes::install_github('tidyverse/dplyr')"
