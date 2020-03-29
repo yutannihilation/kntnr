@@ -1,4 +1,4 @@
-This is a maintenance release to fix compatibility issue with upcoming release of dplyr. All changes are internal and non-breaking.
+This is a maintenance release to fix compatibility issue with upcoming release of dplyr. All changes are about tests and there are no user-visible ones.
 
 ## Test environments
 
