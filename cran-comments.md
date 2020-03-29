@@ -1,9 +1,10 @@
-This is a maintenance release to fix compatibility issue with upcoming release of tidyr. All changes are internal and non-breaking.
+This is a maintenance release to fix compatibility issue with upcoming release of dplyr. All changes are internal and non-breaking.
 
 ## Test environments
-* local Windows install, R 3.6.1
-* ubuntu 16.04 (on travis-ci), R 3.6.1
-* win-builder (devel)
+
+* local Arch Linux install: release
+* travis-ci: 3.5, release and devel
+* win-builder: devel
 
 ## R CMD check results
 
