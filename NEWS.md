@@ -1,4 +1,6 @@
-# kntnr (development version)
+# kntnr 0.4.3
+
+* Fix compatibility problem with dplyr v1.0.0.
 
 # kntnr 0.4.2
 
