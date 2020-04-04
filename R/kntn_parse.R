@@ -77,7 +77,7 @@ kntn_parse_col <- function(x) {
 }
 
 kntn_parse_datetime <- function(x) {
-  lubridate::parse_date_time2(x, "YmdHMS", exact = TRUE)
+  lubridate::parse_date_time2(x, "YmdHMS")
 }
 
 kntn_wrap_with_list <- function(x) {
