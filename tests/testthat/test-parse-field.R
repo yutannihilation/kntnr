@@ -1,10 +1,6 @@
 context("parse")
 
-test_parse_field <- function(txt, expect, skip_on_windows = FALSE) {
-  if (skip_on_windows) {
-    skip_on_os("windows")
-  }
-
+test_parse_field <- function(txt, expect) {
   j <- jsonlite::fromJSON(txt, simplifyVector = FALSE)
   test_that(sprintf("parsing %s works", j$type), {
     x <- kntn_parse_records(list(list(test = j)))
@@ -64,8 +60,7 @@ test_parse_field(
     "type": "CREATED_TIME",
     "value": "2015-01-22T15:07:00Z"
   }',
-  as.POSIXct("2015-01-22 15:07:00", tz = "UTC"),
-  skip_on_windows = TRUE
+  as.POSIXct("2015-01-22 15:07:00", tz = "UTC")
 )
 
 test_parse_field(
@@ -92,8 +87,7 @@ test_parse_field(
     "type": "UPDATED_TIME",
     "value": "2015-01-22T15:07:00Z"
   }',
-  as.POSIXct("2015-01-22 15:07:00", tz = "UTC"),
-  skip_on_windows = TRUE
+  as.POSIXct("2015-01-22 15:07:00", tz = "UTC")
 )
 
 test_parse_field(
@@ -253,8 +247,7 @@ test_parse_field(
     "type": "DATETIME",
     "value": "2015-03-17T10:20:00Z"
   }',
-  as.POSIXct("2015-03-17 10:20:00", tz = "UTC"),
-  skip_on_windows = TRUE
+  as.POSIXct("2015-03-17 10:20:00", tz = "UTC")
 )
 
 
