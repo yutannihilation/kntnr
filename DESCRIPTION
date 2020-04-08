@@ -1,7 +1,7 @@
 Package: kntnr
 Type: Package
 Title: R Client for 'kintone' API
-Version: 0.4.4
+Version: 0.4.4.9000
 Authors@R: 
     person(given = "Hiroaki",
            family = "Yutani",
