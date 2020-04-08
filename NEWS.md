@@ -1,4 +1,4 @@
-# kntnr (development version)
+# kntnr 0.4.4
 
 # kntnr 0.4.3
 
