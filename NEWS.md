@@ -1,5 +1,7 @@
 # kntnr 0.4.4
 
+* Fix errors on the CRAN check.
+
 # kntnr 0.4.3
 
 * Fix compatibility problem with dplyr v1.0.0.
