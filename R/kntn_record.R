@@ -212,7 +212,11 @@ kntn_records <- function(app, fields = NULL, query = "",
     Sys.sleep(interval_time)
   }
 
-  if(as == "data.frame") dplyr::bind_rows(result) else result
+  if (identical(as, "data.frame")) {
+    tibble::as_tibble(dplyr::bind_rows(result))
+  } else {
+    result
+  }
 }
 
 kntn_stop_for_status <- function(res) {

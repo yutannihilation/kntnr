@@ -94,7 +94,8 @@ kntn_parse_multi_user <- function(x) {
 }
 
 kntn_parse_file <- function(x) {
-  purrr::map(x, dplyr::bind_rows)
+  x <- purrr::map(x, dplyr::bind_rows)
+  purrr::map(x, tibble::as_tibble)
 }
 
 kntn_parse_subtable <- function(x) {
