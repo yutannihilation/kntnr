@@ -196,7 +196,7 @@ test_parse_field(
     ]
   }',
   function(x) {
-    is.list(x) && dplyr::is.tbl(x[[1]]) &&
+    is.list(x) && tibble::is_tibble(x[[1]]) &&
       identical(colnames(x[[1]]), c("contentType", "fileKey", "name", "size"))
   }
 )
