@@ -70,13 +70,18 @@ fill_dummy_df <- function(x, nm) {
     dummy_df_example <- x[idx_nonempty][[1]]
     dummy_colnames <- colnames(dummy_df_example)
     dummy <- purrr::map(dummy_df_example,
-                        ~ purrr::when(.,
-                                    is_nested_chr(.) ~ list(character(0)),
-                                    is_nested_df(.) ~ list(tibble::tibble()),
-                                    ~ NA))
+                        function(.x) {
+                          if (is_nested_chr(.x)) {
+                            list(character(0))
+                          } else if (is_nested_df(.x)) {
+                            list(tibble::tibble())
+                          } else {
+                            NA
+                          }
+                        })
   } else {
     dummy_colnames <- nm
-    dummy <- purrr::rerun(length(dummy_colnames), NA)
+    dummy <- purrr::map(seq_along(dummy_colnames), function(i) NA)
   }
 
   names(dummy) <- dummy_colnames
